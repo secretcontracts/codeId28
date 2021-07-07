@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InitMsg",
+  "description": "Instantiation message",
+  "type": "object",
+  "required": [
+    "bid_contract",
+    "bid_decimals",
+    "bid_symbol",
+    "ends_at",
+    "factory",
+    "index",
+    "label",
+    "minimum_bid",
+    "sell_amount",
+    "sell_contract",
+    "sell_decimals",
+    "sell_symbol",
+    "seller"
+  ],
+  "properties": {
+    "bid_contract": {
+      "description": "bid contract code hash and address",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContractInfo"
+        }
+      ]
+    },
+    "bid_decimals": {
+      "description": "bid token decimal places,",
+      "type": "integer",
+      "format": "uint8",
+      "minimum": 0.0
+    },
+    "bid_symbol": {
+      "description": "bid symbol index",
+      "type": "integer",
+      "format": "uint16",
+      "minimum": 0.0
+    },
+    "description": {
+      "description": "Optional free-form description of the auction (best to avoid double quotes). As an example it could be the date the owner will likely finalize the auction, or a list of other auctions for the same token, etc...",
+      "default": null,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ends_at": {
+      "description": "timestamp after which anyone may close the auction. Timestamp is in seconds since epoch 01/01/1970",
+      "type": "integer",
+      "format": "uint64",
+      "minimum": 0.0
+    },
+    "factory": {
+      "description": "factory contract code hash and address",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContractInfo"
+        }
+      ]
+    },
+    "index": {
+      "description": "auction index with the factory",
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0.0
+    },
+    "label": {
+      "description": "String label for the auction",
+      "type": "string"
+    },
+    "minimum_bid": {
+      "description": "minimum bid that will be accepted",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Uint128"
+        }
+      ]
+    },
+    "sell_amount": {
+      "description": "amount of tokens being sold",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Uint128"
+        }
+      ]
+    },
+    "sell_contract": {
+      "description": "sell contract code hash and address",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContractInfo"
+        }
+      ]
+    },
+    "sell_decimals": {
+      "description": "sell token decimal places",
+      "type": "integer",
+      "format": "uint8",
+      "minimum": 0.0
+    },
+    "sell_symbol": {
+      "description": "sell symbol index",
+      "type": "integer",
+      "format": "uint16",
+      "minimum": 0.0
+    },
+    "seller": {
+      "description": "auction seller",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HumanAddr"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "ContractInfo": {
+      "description": "code hash and address of a contract",
+      "type": "object",
+      "required": [
+        "address",
+        "code_hash"
+      ],
+      "properties": {
+        "address": {
+          "description": "contract's address",
+          "allOf": [
+            {
+              "$ref": "#/definitions/HumanAddr"
+            }
+          ]
+        },
+        "code_hash": {
+          "description": "contract's code hash string",
+          "type": "string"
+        }
+      }
+    },
+    "HumanAddr": {
+      "type": "string"
+    },
+    "Uint128": {
+      "type": "string"
+    }
+  }
+}
